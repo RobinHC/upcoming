@@ -1,0 +1,15 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  3.0.0                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+
+speed             (600 148.16 0); // m/s, Mach 
+temperature       270; // Kelvin
+pressure          100000; // Pascals
+turbulentKE       1000; // k
+turbulentEpsilon  25000; // epsilon
+
+// ************************************************************************* //
