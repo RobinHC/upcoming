@@ -37,16 +37,14 @@ divSchemes
     // div(phiv,p)     Gauss limitedLinear 1;
     
     // Upwind 1st order
-    // default         Gauss upwind;
+    default         Gauss upwind;
 
     // Upwind 2nd order
-    div(phi,U)      Gauss linearUpwind grad(U);
-    div(phi,e)      Gauss linearUpwind grad(e);
-    div(phid,p)     Gauss linearUpwind grad(p);
-    div(phi,K)      Gauss linearUpwind grad(K);
-    div(phiv,p)     Gauss linearUpwind grad(p);
-    div(phi,k)      Gauss upwind;
-    div(phi,epsilon) Gauss upwind;
+    // div(phi,U)      Gauss linearUpwind grad(U);
+    // div(phi,e)      Gauss linearUpwind grad(e);
+    // div(phid,p)     Gauss linearUpwind grad(p);
+    // div(phi,K)      Gauss linearUpwind grad(K);
+    // div(phiv,p)     Gauss linearUpwind grad(p);
 
     div(phi,k)      Gauss upwind;
     div(phi,epsilon) Gauss upwind;

@@ -5,10 +5,17 @@
 |   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
 |    \\/     M anipulation  |                                                 |
 \*---------------------------------------------------------------------------*/
-
-speed             (987 0 0); // m/s 
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volVectorField;
+    object      U;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+speed             (825 0 0); // m/s 
 temperature       270; // Kelvin
-pressure          100000; // Pascals
+pressure          76; // Pascals
 turbulentKE       1000; // k
 turbulentEpsilon  25000; // epsilon
 

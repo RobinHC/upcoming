@@ -25,11 +25,13 @@ stopAt          endTime;
 
 endTime         0.03;
 
-deltaT          1e-08;
+deltaT          3e-07;
 
-writeControl    runTime;
+// writeControl    runTime;
+writeControl	timeStep;
 
-writeInterval   1e-04;
+// writeInterval   1e-04;
+writeInterval	1000;
 
 purgeWrite      0;
 
@@ -44,7 +46,5 @@ timeFormat      general;
 timePrecision   6;
 
 runTimeModifiable true;
-
-maxCo		1;
 
 // ************************************************************************* //

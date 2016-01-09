@@ -17,7 +17,7 @@ COMMANDS:
 gmsh mesh.geo -3 -o test.msh  
 gmshToFoam test.msh -case case  
 # Modify boundary file  
-rhoCentralFoam  
+sonicFoam  
 
 This tutorial was run successfully on:  
 -Ubuntu 14.04 64-bit  
