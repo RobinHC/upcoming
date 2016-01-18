@@ -1,75 +1,65 @@
 //Inputs
-vehicle_diameter = 0.198;
-vehicle_diameter_back = 0.08106;
-vehicle_length = 0.130;
-tube_diameter = 10*vehicle_diameter;
-tube_length = 10*vehicle_diameter;
-
-shield_radius = 0.19;
-
-vehicle_gridsize = 0.01*vehicle_diameter;
-far_gridsize = 0.02*tube_diameter;
-
-shock_grid_line_distance = vehicle_diameter/2;
-shock_grid_line_length = vehicle_diameter;
-
-// Derived variables.
-shield_span = Asin(vehicle_diameter/2 / shield_radius);
-shield_end_distance = (1-Cos(shield_span))*shield_radius;
-
+angle_of_attack = 5*Pi/180;
+airfoil_chord = 1;
+ground_height = 0.5*airfoil_chord;
+boundary_distance = 10*airfoil_chord;
+boundary_gridsize = 0.1*boundary_distance;
+transition_gridsize = 0.1*airfoil_chord;
+airfoil_gridsize = 0.005*airfoil_chord;
+cell_depth = airfoil_chord;
+te_omit = 0;
 
 ce = 0;
-Point(ce++) = {0,0,0,vehicle_gridsize};e1=ce;
-Point(ce++) = {shield_radius,0,0,vehicle_gridsize};c1 = ce;
-Point(ce++) = {shield_end_distance,vehicle_diameter/2,0,vehicle_gridsize};
-  t1=ce;
-Point(ce++) = {vehicle_length,0,0,vehicle_gridsize};e2=ce;
-Point(ce++) = {vehicle_length,vehicle_diameter_back/2,0,vehicle_gridsize};
-  t2=ce;
-Point(ce++) = {-tube_length/2+vehicle_length/2,0,0,far_gridsize};i1=ce;
-Point(ce++) = {tube_length/2+vehicle_length/2,0,0,far_gridsize};o1=ce;
-Point(ce++) = {-tube_length/2+vehicle_length/2,tube_diameter/2,0,far_gridsize};
-  i2=ce;
-Point(ce++) = {tube_length/2+vehicle_length/2,tube_diameter/2,0,far_gridsize};
-  o2=ce;
 
-// Function direction
-//   // In: p1=; p2=;
-//   // Out: direction[] = {};
-//   c1[] = Boundary{Point{p1};};
-//   c2[] = Boundary{Point{p2};};
-//   direction[] = {c2[0]-c1[0],c2[1]-c1[1],0};
-// Return
+Include "NACA2412.geo";
+points[] ={};
+For k In {0:airfoil_points-1}
+	Point(ce++) = {
+		airfoil_chord*airfoil_x[k],
+		airfoil_chord*airfoil_y[k],
+		0,
+		airfoil_gridsize};
+	If(k < airfoil_points-te_omit)
+		points[] += ce;
+	EndIf
+EndFor
 
-// p1 = t1;
-// p2 = t2;   
-// Call direction;
-// c1[] = Boundary{Point{t1};};
-// Point(ce++) = {};
+Rotate{ {0,0,1}, {0,0,0}, -angle_of_attack }
+{
+	Point{points[]};
+}
 
+BSpline(ce++) = points[];spline_id = ce;
+Line(ce++) = {points[airfoil_points-1],points[0]};te_line = ce;
 
-lns[]={};
-Line(ce++) = {i1,e1};lns[]+=ce;
-Circle(ce++) = {e1,c1,t1};lns[]+=ce;front_arc = ce;
-Line(ce++) = {t1,t2};lns[]+=ce;
-Line(ce++) = {t2,e2};lns[]+=ce;
-Line(ce++) = {e2,o1};lns[]+=ce;
-Line(ce++) = {o1,o2};lns[]+=ce;
-Line(ce++) = {o2,i2};lns[]+=ce;
-Line(ce++) = {i2,i1};lns[]+=ce;
+pts[]={};
+Point(ce++) = {-boundary_distance,-boundary_distance,0,boundary_gridsize};
+pts[]+=ce;
+Point(ce++) = {boundary_distance,-boundary_distance,0,boundary_gridsize};
+pts[]+=ce;
+Point(ce++) = {boundary_distance,boundary_distance,0,boundary_gridsize};
+pts[]+=ce;
+Point(ce++) = {-boundary_distance,boundary_distance,0,boundary_gridsize};
+pts[]+=ce;
+
+lns[] = {};
+Line(ce++) = pts[{0,1}];lns[]+=ce;
+Line(ce++) = pts[{1,2}];lns[]+=ce;
+Line(ce++) = pts[{2,3}];lns[]+=ce;
+Line(ce++) = pts[{3,0}];lns[]+=ce;
 
 
 // // Grid field
 Field[1] = Attractor;
 // Field[1].NodesList = {e1};
-Field[1].NNodesByEdge = 100;
-Field[1].EdgesList = {front_arc};
+Field[1].NNodesByEdge = 200;
+Field[1].EdgesList = {spline_id};
 Field[2] = Threshold;
 Field[2].IField = 1;
-Field[2].LcMin = vehicle_gridsize;
-Field[2].LcMax = far_gridsize;
-Field[2].DistMin = 0.4*vehicle_diameter;
-Field[2].DistMax = 1*vehicle_diameter;
+Field[2].LcMin = airfoil_gridsize;
+Field[2].LcMax = boundary_gridsize;
+Field[2].DistMin = 0.05*airfoil_chord;
+Field[2].DistMax = 0.5*boundary_distance;
 Field[7] = Min;
 Field[7].FieldsList = {2};
 Background Field = 7;
@@ -77,35 +67,25 @@ Background Field = 7;
 
 
 
-Line Loop(ce++) = lns[];
-
-Plane Surface(ce++) = ce-1;surf=ce;
 
 
+Line Loop(ce++) = lns[]; boundary_loop = ce;
+Line Loop(ce++) = {spline_id,te_line}; spline_loop = ce;
 
-// Point(ce++) = {-shock_grid_line_distance, 0.001, 0, vehicle_gridsize}; 
-// spt1 = ce;
-// Point(ce++) = {-shock_grid_line_distance, shock_grid_line_length, 0, 
-//     vehicle_gridsize}; spt2 = ce;
-// Line(ce++) = {spt1, spt2}; sln = ce;
-// Point{spt2} In Surface{surf};
+Plane Surface(ce++) = {boundary_loop, spline_loop}; extrude_surface = ce;
 
-Rotate {{1,0,0},{0,0,0},2.5*Pi/180.0}
+new_entities[] = 
+Extrude{0,0,cell_depth}
 {
-	Surface{surf};
-}
-new_entities[] = Extrude {{1,0,0},{0,0,0},-5*Pi/180.0}
-{
-	Surface{surf};
+	Surface{extrude_surface};
 	Layers{1};
 	Recombine;
 };
 
-Physical Surface("vehicle") = {new_entities[{2:4}]};
-Physical Surface("tunnel") = {new_entities[6]};
-Physical Surface("outlet") = {new_entities[5]};
-Physical Surface("inlet") = {new_entities[7]};
-Physical Surface("wedge0") = {surf};
-Physical Surface("wedge1") = {new_entities[0]};
+Physical Surface("frontAndBack") = {extrude_surface,new_entities[0]};
+Physical Surface("tunnel") = new_entities[{2,4}];
+Physical Surface("inlet") = new_entities[5];
+Physical Surface("outlet") = new_entities[3];
+Physical Surface("wing") = new_entities[{6,7}];
+Physical Volume(1000) = new_entities[1];
 
-Physical Volume("volume") = {new_entities[1]};
