@@ -4,8 +4,7 @@ import os
 import sys
 import math
 
-# forces_file = "case/postProcessing/wing/0/forces_2.75571.dat"
-forces_file = "case_nowake/postProcessing/wing/0/forces.dat"
+forces_file = "postProcessing/wing/0/forces.dat"
 
 if not os.path.isfile(forces_file):
 	print "Forces file not found at "+forces_file
