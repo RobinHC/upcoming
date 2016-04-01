@@ -4,8 +4,8 @@ All code can be found at: https://github.com/rlee32/openfoam_tutorials/tree/mast
 
 ## Description
 Here we will simulate a bracket loaded in cantilever beam fashion in OpenFOAM, using the solidDisplacementFoam solver. A mesh is made in Gmsh and shear loads (AKA traction) are specified in the OpenFOAM case files. We discuss how to work around the stress singularities at square corners by moving the point of singularity so it does not affect the results.  
-For some additional description of the solver, please see: http://cfd.direct/openfoam/user-guide/platehole/.  
-
+For some additional description of the solver, please see: http://cfd.direct/openfoam/user-guide/platehole/  
+For more information on singularities in structures problems: https://www.comsol.com/blogs/how-identify-resolve-singularities-model-meshing/  
 ## Outline
 -Go over mesh.  
 -Go over boundary conditions and load specification.  
