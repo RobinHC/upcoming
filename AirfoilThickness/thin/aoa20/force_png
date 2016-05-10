@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# gnuplot -persist > /dev/null 2>&1 << EOF
+
+gnuplot -persist << EOF
+  set key opaque
+  set xlabel "Iteration"
+  set ylabel "Lift / Drag Coefficient"
+  set term png
+  set output "coeffs.png"
+
+  plot "cl.dat" with lines,\
+    "cd.dat" with lines
+EOF

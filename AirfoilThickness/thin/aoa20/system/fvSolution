@@ -1,0 +1,114 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  3.0.0                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      fvSolution;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+solvers
+{
+    pcorr
+    {
+        solver           GAMG;
+        tolerance        1e-9;
+        relTol           0.001;
+        smoother         GaussSeidel;
+        nPreSweeps       0;
+        nPostSweeps      2;
+        cacheAgglomeration true;
+        agglomerator     faceAreaPair;
+        nCellsInCoarsestLevel 100;
+        mergeLevels      1;
+    }
+
+    p
+    {
+        $pcorr
+        tolerance        1e-9;
+        relTol           0.001;
+    }
+
+    pFinal
+    {
+        $p;
+        tolerance        1e-9;
+        relTol           0.001;
+    }
+
+    "(U|k|omega)"
+    {
+        solver          smoothSolver;
+        smoother        symGaussSeidel;
+        tolerance       1e-12;
+        relTol          0.001;
+    }
+
+    "(U|k|omega)Final"
+    {
+        $U;
+        tolerance       1e-12;
+        relTol          0.001;
+    }
+}
+
+PIMPLE
+{
+  correctPhi               yes;
+
+ //  // PISO
+ //  nOuterCorrectors         1; // PISO == 1
+ //  nCorrectors              5; // More nCorrectors, better stability, Papa Johns.
+	// // PISO
+
+  // SIMPLE
+  nOuterCorrectors         1;
+  nCorrectors              1;
+  // SIMPLE
+
+  nNonOrthogonalCorrectors 1;
+  pRefCell	0;
+	pRefValue	0;
+}
+
+relaxationFactors
+{
+  // // PISO (set to 1).
+  // fields
+  // {
+  //     p               1;
+  // }
+  // equations
+  // {
+  //     "(U|k|omega)"   1;
+  //     "(U|k|omega)Final" 1;
+  // }
+  // // PISO
+
+  // SIMPLE 
+  fields
+  {
+      p               0.25;
+  }
+  equations
+  {
+      "(U|k|omega)"   0.25;
+      "(U|k|omega)Final" 0.25;
+  }
+  // SIMPLE
+}
+
+cache
+{
+    grad(U);
+}
+
+// ************************************************************************* //
