@@ -8,7 +8,7 @@ Here we simulate a simple single-bend cambered airfoil geometry in
 incompressible flow. Then we compare it to the same geometry, but with the 
 leading and trailing edges connected by a surface. This changes the relative 
 camber and thickness, but keeps the top surface geometry. The aim of this 
-study is to compare a  
+study is to compare the performance difference that occurs as a result of adding a bottom surface (practically, this may resemble someone utilizing a ) 
 
 ## Outline  
 -Create mesh in Gmsh.  
