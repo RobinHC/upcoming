@@ -22,6 +22,7 @@ gmsh mesh.geo -3 -o test.msh
 gmshToFoam test.msh -case case  
 changeDictionary  
 sonicFoam  
+sample  
 
 ## Software
 -Ubuntu 14.04 64-bit  

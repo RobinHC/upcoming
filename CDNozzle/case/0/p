@@ -48,7 +48,8 @@ boundaryField
     // }
     outlet
     {
-        type            zeroGradient;
+        type            fixedValue;
+        value           uniform $exit_pressure;
     }
 
     nozzle
