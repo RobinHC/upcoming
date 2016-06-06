@@ -1,0 +1,70 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  3.0.0                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      p;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+#include        "inputs"
+
+dimensions      [1 -1 -2 0 0 0 0];
+
+internalField   uniform $exit_pressure;
+
+boundaryField 
+{
+    inlet
+    {
+        type            totalPressure;
+        p0              uniform $total_pressure;
+        U               U;
+        phi             phi;
+        rho             rho;
+        psi             none;
+        gamma           1.4;
+        value           uniform $total_pressure;
+    }
+    // outlet
+    // {
+    //     type            waveTransmissive;
+    //     field           p;
+    //     phi             phi;
+    //     rho             rho;
+    //     psi             thermo:psi;
+    //     gamma           1.4;
+    //     fieldInf        $exit_pressure;
+    //     // lInf: A measure of how far away the far-field condition should be. 
+    //     lInf            0.254; 
+    //     value           $internalField;
+    // }
+    outlet
+    {
+        type            fixedValue;
+        value           uniform $exit_pressure;
+    }
+
+    nozzle
+    {
+        type            zeroGradient;
+    }
+
+    wedge0
+    {
+        type            wedge;
+    }
+    wedge1
+    {
+        type            wedge;
+    }
+}
+
+// ************************************************************************* //
