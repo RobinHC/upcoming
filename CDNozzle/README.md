@@ -15,6 +15,7 @@ http://www.grc.nasa.gov/WWW/wind/valid/cdv/cdv.html
 -Describe how to generate a structured mesh in Gmsh.
 -Convert the mesh and change the boundary file.  
 -Run the simulation and view comparisons.  
+-Sample Mach number and pressure along the centerline axis using sampleDict.  
 
 ## Commands
 gmsh mesh.geo -3 -o test.msh  

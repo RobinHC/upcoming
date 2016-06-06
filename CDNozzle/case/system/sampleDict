@@ -7,58 +7,30 @@
 \*---------------------------------------------------------------------------*/
 FoamFile
 {
-    version     1.0;
-    format      binary;
-    class       polyBoundaryMesh;
-    location    "constant/polyMesh";
-    object      boundary;
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      sampleDict;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
+interpolationScheme cellPoint;
 
-5
+setFormat       raw;
+
+sets
 (
-outlet
-{
-    type            patch;
-    physicalType    patch;
-    nFaces          19;
-    startFace       3644;
-}
+    data
+    {
+        type    uniform;
+        axis    x;
+        start   (0 0.001 0);
+        end     (0.254 0.001 0);
+        nPoints 1000;
+    }
+);
 
-inlet
-{
-    type            patch;
-    physicalType    patch;
-    nFaces          19;
-    startFace       3663;
-}
-
-wedge0
-{
-    type            wedge;
-    physicalType    patch;
-    nFaces          1881;
-    startFace       3682;
-}
-
-nozzle
-{
-    type            wall;
-    physicalType    patch;
-    nFaces          99;
-    startFace       5563;
-}
-
-wedge1
-{
-    type            wedge;
-    physicalType    patch;
-    nFaces          1881;
-    startFace       5662;
-}
-
-)
-
+fields          (U p);
 
 // ************************************************************************* //
