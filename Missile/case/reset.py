@@ -46,6 +46,7 @@ def clean(casedir="./"):
   remove( casedir+"/postProcessing" )
   remove( casedir+"/log" )
   remove( casedir+"/../test.msh" )
+  remove( casedir+"/logs" )
   return
 
 if __name__ == "__main__":
