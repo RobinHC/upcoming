@@ -9,6 +9,9 @@ Here we simulate external supersonic flow on a missile-shaped body
 using a hybrid structured-unstructured axisymmetric mesh written in Gmsh. 
 The geometry and computational domain follow the specifications here: 
 http://turbmodels.larc.nasa.gov/axiswblim7_val.html  
+We find that a time-averaged maximum Courant number of less than 1 is 
+insufficient for stability (perhaps because spikes occur greater than 1) -- 
+less than 0.1 is seems to work.  
 
 ## Outline  
 -Describe how to generate a structured and unstructured mesh in Gmsh.  

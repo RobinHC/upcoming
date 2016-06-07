@@ -21,17 +21,21 @@ internalField   uniform 0;
 
 boundaryField
 {
-    inlet
+    freestream
     {
         type            calculated;
         value           uniform 0;
+    }
+    top
+    {
+        type            slip;
     }
     outlet
     {
         type            calculated;
         value           uniform 0;
     }
-    nozzle
+    missile
     {
         // Boundary condition for turbulent thermal diffusivity when using wall 
         // functions.
@@ -39,7 +43,6 @@ boundaryField
         Prt             0.85; // Turbulent Prandtl number. 
         value           uniform 0;
     }
-
     wedge0
     {
         type            wedge;

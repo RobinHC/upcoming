@@ -23,11 +23,15 @@ internalField   uniform $turbulentKE;
 
 boundaryField
 {
-    inlet
+    freestream
     {
         type            inletOutlet;
         inletValue      $internalField;
         value           $internalField;
+    }
+    top
+    {
+        type            slip;
     }
     outlet
     {
@@ -35,12 +39,11 @@ boundaryField
         inletValue      $internalField;
         value           $internalField;
     }
-    nozzle
+    missile
     {
         type            kqRWallFunction;
         value           $internalField;
     }
-
     wedge0
     {
         type            wedge;

@@ -18,40 +18,39 @@ FoamFile
 
 dimensions      [0 1 -1 0 0 0 0];
 
-internalField   uniform $initial_velocity;
+internalField   uniform $freestream_velocity;
 
 boundaryField
 {
-    // inlet
-    // {
-    //     type            supersonicFreestream;
-    //     pInf            $pressure;
-    //     TInf            $temperature;
-    //     UInf            $speed;
-    //     gamma           1.4; // Specific heat ratio
-    //     value           $internalField;
-    // }
-    inlet
+//     freestream
+//     {
+//         type            supersonicFreestream;
+//         pInf            $static_pressure;
+//         TInf            $static_temperature;
+//         UInf            $freestream_velocity;
+//         gamma           1.4;
+//         value           $internalField;
+//     }
+    freestream
     {
-        type            zeroGradient;
+        type            fixedValue;
+        value           $internalField;
     }
-    // outlet
-    // {
-    //     type            inletOutlet;
-    //     inletValue      $internalField;
-    //     value           $internalField;
-    // }
+    top
+    {
+        type            slip;
+    }
     outlet
     {
-        type            zeroGradient;
+        type            inletOutlet;
+        inletValue      $internalField;
+        value           $internalField;
     }
-
-    nozzle
+    missile
     {
         type            fixedValue;
         value           uniform (0 0 0);
     }
-
     wedge0
     {
         type            wedge;

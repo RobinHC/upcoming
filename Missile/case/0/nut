@@ -21,17 +21,21 @@ internalField   uniform 0;
 
 boundaryField
 {
-    inlet
+    freestream
     {
         type            calculated;
         value           uniform 0;
+    }
+    top
+    {
+        type            slip;
     }
     outlet
     {
         type            calculated;
         value           uniform 0;
     }
-    nozzle
+    missile
     {
         type            nutkWallFunction;
         Cmu             0.09;
@@ -39,7 +43,6 @@ boundaryField
         E               9.8;
         value           uniform 0;
     }
-
     wedge0
     {
         type            wedge;

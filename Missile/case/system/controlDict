@@ -25,13 +25,13 @@ stopAt          endTime;
 
 endTime         0.1;
 
-deltaT          1e-05;
+deltaT          1e-06;
 
 // writeControl    runTime;
 writeControl	timeStep;
 
-// writeInterval   1e-04;
-writeInterval	100;
+writeInterval   1e-03;
+// writeInterval	  100;
 
 purgeWrite      0;
 

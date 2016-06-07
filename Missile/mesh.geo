@@ -101,7 +101,8 @@ new_entities[] = Extrude {{1,0,0},{0,0,0},-5*Pi/180.0}
 
 // Define names of physical surfaces.
 
-Physical Surface("freestream") = {new_entities[{5,6,9}]};
+Physical Surface("freestream") = {new_entities[{6,9}]};
+Physical Surface("top") = {new_entities[{5}]};
 Physical Surface("outlet") = {new_entities[{4,17}]};
 // Physical Surface("inlet") = {new_entities[4]};
 Physical Surface("wedge0") = {bl_surf2, bl_surf1, external};

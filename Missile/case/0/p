@@ -18,45 +18,35 @@ FoamFile
 
 dimensions      [1 -1 -2 0 0 0 0];
 
-internalField   uniform $exit_pressure;
+internalField   uniform $static_pressure;
 
 boundaryField 
 {
-    inlet
-    {
-        type            totalPressure;
-        p0              uniform $total_pressure;
-        U               U;
-        phi             phi;
-        rho             rho;
-        psi             none;
-        gamma           1.4;
-        value           uniform $total_pressure;
-    }
-    // outlet
-    // {
-    //     type            waveTransmissive;
-    //     field           p;
-    //     phi             phi;
-    //     rho             rho;
-    //     psi             thermo:psi;
-    //     gamma           1.4;
-    //     fieldInf        $exit_pressure;
-    //     // lInf: A measure of how far away the far-field condition should be. 
-    //     lInf            0.254; 
-    //     value           $internalField;
-    // }
-    outlet
-    {
-        type            fixedValue;
-        value           uniform $exit_pressure;
-    }
-
-    nozzle
+    freestream
     {
         type            zeroGradient;
     }
-
+    top
+    {
+        type            slip;
+    }
+    outlet
+    {
+        type            waveTransmissive;
+        field           p;
+        phi             phi;
+        rho             rho;
+        psi             thermo:psi;
+        gamma           1.4;
+        fieldInf        $static_pressure;
+        // lInf: A measure of how far away the far-field condition should be. 
+        lInf            1; 
+        value           $internalField;
+    }
+    missile
+    {
+        type            zeroGradient;
+    }
     wedge0
     {
         type            wedge;

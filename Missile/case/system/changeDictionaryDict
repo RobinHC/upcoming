@@ -18,9 +18,13 @@ dictionaryReplacement
 {
     boundary
     {
-        nozzle
+        missile
         {
             type wall;
+        }
+        top
+        {
+            type slip;
         }
         wedge0
         {

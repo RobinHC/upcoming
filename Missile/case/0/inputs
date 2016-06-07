@@ -13,15 +13,16 @@ FoamFile
     object      U;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
-// By sqrt(gamma*R*total_temp), speed of sound is approximately 149.4 m/s
-initial_velocity        (29.88 0 0); // m/s, initial condition, M~=0.2
-total_temperature       55.5556; // Kelvin
-total_pressure          6894.76; // Pascals
-exit_pressure           6136.3364; // Pascals total/exit = 0.89 
-// exit_pressure           5171.07; // Pascals total/exit = 0.75
-// exit_pressure           1103.1616; // Pascals total/exit = 0.16
+// By sqrt(gamma*R*static_temp), speed of sound is approximately 179.3 m/s
+// As per http://turbmodels.larc.nasa.gov/axiswblim7_val.html:
+// Re = 57060 per cm and M = 7.11:
+//  U = 1274.8 m/s and nu = 0.00022341395
+freestream_velocity     (200 0 0); // (1274.8 0 0); // m/s
+static_temperature      80; // Kelvin, aka freestream temp.
+static_pressure         2296; // Pascals, assumed density = 0.1
+wall_temperature        311; // K
 // turbulence model
-turbulentKE             1000; // k
-turbulentEpsilon        25000; // epsilon
+turbulentKE             100; // k
+turbulentEpsilon        250000; // epsilon
 
 // ************************************************************************* //

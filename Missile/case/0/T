@@ -18,16 +18,19 @@ FoamFile
 
 dimensions      [0 0 0 1 0 0 0];
 
-internalField   uniform $total_temperature;
+internalField   uniform $static_temperature;
 
 boundaryField
 {
-    inlet
+    freestream
     {
-        type            totalTemperature;
-        gamma           1.4;
-        T0              uniform $total_temperature;
-        value           uniform $total_temperature;
+        type            inletOutlet;
+        inletValue      $internalField;
+        value           $internalField;
+    }
+    top
+    {
+        type            slip;
     }
 
     outlet
@@ -36,12 +39,11 @@ boundaryField
         inletValue      $internalField;
         value           $internalField;
     }
-
-    nozzle
+    missile
     {
-        type            zeroGradient;
+        type            fixedValue;
+        value           uniform $wall_temperature;
     }
-
     wedge0
     {
         type            wedge;

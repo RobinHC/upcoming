@@ -23,11 +23,15 @@ internalField   uniform $turbulentEpsilon;
 
 boundaryField
 {
-    inlet
+    freestream
     {
         type            inletOutlet;
         inletValue      $internalField;
         value           $internalField;
+    }
+    top
+    {
+        type            slip;
     }
     outlet
     {
@@ -35,7 +39,7 @@ boundaryField
         inletValue      $internalField;
         value           $internalField;
     }
-    nozzle
+    missile
     {
         type            epsilonWallFunction;
         // Cmu             0.09;
