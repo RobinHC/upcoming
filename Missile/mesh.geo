@@ -11,16 +11,16 @@
 //Inputs
 
 // Geometry
-radius = 0.1;
-
-body_length = 0.1;
+radius = 0.1; // m
+body_length = 1.39; // m, from leading edge to flare base
+flare = 20*Pi/180; // rad
 far_field = 10*radius;
 
 // Grid
 cell_length = 0.1*radius; // determines how many cells are along the surface.
 bl_height = 0.02;
-normal_cells = ; // number of cells in BL normal to surface.
-
+normal_cells = 20; // number of cells in BL normal to surface.
+bl_progression = 1.1; // The geometric increase in cell size in the BL.
 
 normal_cells = 20;
 axis_cells = 100;
