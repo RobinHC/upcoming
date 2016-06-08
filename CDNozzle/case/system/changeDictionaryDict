@@ -20,7 +20,8 @@ dictionaryReplacement
     {
         nozzle
         {
-            type wall;
+            type slip;
+            // type wall;
         }
         wedge0
         {

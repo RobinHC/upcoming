@@ -22,7 +22,7 @@ less than 0.1 is seems to work.
 gmsh mesh.geo -3 -o test.msh  
 gmshToFoam test.msh -case case  
 changeDictionary  
-sonicFoam  
+sonicFoam > log  
 
 ## Software
 -Ubuntu 14.04 64-bit  

@@ -7,9 +7,10 @@
 
 //Inputs
 
-normal_cells = 20;
-axis_cells = 100;
+normal_cells = 121;
+axis_cells = 301;
 samples = 100; // points to use in BSpline of nozzle wall.
+bump = 0.25; // controls concentration near wall and centerline.
 // Constants
 itm = 0.0254; // inch to meter.
 i2tm2 = itm*itm; // in^2 to m^2
@@ -70,7 +71,7 @@ Plane Surface(ce++) = loop; surf = ce;
 // Specify structured meshing.
 
 Transfinite Line{ wall, axis } = axis_cells;
-Transfinite Line{ inlet, outlet } = normal_cells;
+Transfinite Line{ inlet, outlet } = normal_cells Using Bump bump;
 Transfinite Surface{ surf };
 Recombine Surface{ surf };
 

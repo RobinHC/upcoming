@@ -54,7 +54,7 @@ boundaryField
 
     nozzle
     {
-        type            zeroGradient;
+        type            slip;
     }
 
     wedge0

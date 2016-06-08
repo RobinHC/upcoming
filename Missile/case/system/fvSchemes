@@ -29,15 +29,18 @@ divSchemes
 {
     default         none;
 
-    // // Default 2nd order
-    // div(phi,U)      Gauss limitedLinearV 1;
-    // div(phi,e)      Gauss limitedLinear 1;
-    // div(phid,p)     Gauss limitedLinear 1;
-    // div(phi,K)      Gauss limitedLinear 1;
-    // div(phiv,p)     Gauss limitedLinear 1;
+    // // 2nd order
+    // default Gauss linear;
+
+    // Default 2nd order
+    div(phi,U)      Gauss limitedLinearV 1;
+    div(phi,e)      Gauss limitedLinear 1;
+    div(phid,p)     Gauss limitedLinear 1;
+    div(phi,K)      Gauss limitedLinear 1;
+    div(phiv,p)     Gauss limitedLinear 1;
     
-    // Upwind 1st order
-    default         Gauss upwind;
+    // // Upwind 1st order
+    // default         Gauss upwind;
 
     // Upwind 2nd order
     // div(phi,U)      Gauss linearUpwind grad(U);

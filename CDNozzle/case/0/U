@@ -48,8 +48,9 @@ boundaryField
 
     nozzle
     {
-        type            fixedValue;
-        value           uniform (0 0 0);
+        type            slip;
+        // type            fixedValue;
+        // value           uniform (0 0 0);
     }
 
     wedge0

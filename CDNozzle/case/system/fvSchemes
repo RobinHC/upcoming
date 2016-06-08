@@ -28,26 +28,28 @@ gradSchemes
 divSchemes
 {
     default         none;
+    // // 2nd order central
+    // default      Gauss linear;
 
-    // // Default 2nd order
-    // div(phi,U)      Gauss limitedLinearV 1;
-    // div(phi,e)      Gauss limitedLinear 1;
-    // div(phid,p)     Gauss limitedLinear 1;
-    // div(phi,K)      Gauss limitedLinear 1;
-    // div(phiv,p)     Gauss limitedLinear 1;
+    // Default 2nd order
+    div(phi,U)      Gauss limitedLinearV 1;
+    div(phi,e)      Gauss limitedLinear 1;
+    div(phid,p)     Gauss limitedLinear 1;
+    div(phi,K)      Gauss limitedLinear 1;
+    div(phiv,p)     Gauss limitedLinear 1;
     
-    // Upwind 1st order
-    default         Gauss upwind;
+    // // Upwind 1st order
+    // default         Gauss upwind;
 
-    // Upwind 2nd order
+    // // Upwind 2nd order
     // div(phi,U)      Gauss linearUpwind grad(U);
     // div(phi,e)      Gauss linearUpwind grad(e);
     // div(phid,p)     Gauss linearUpwind grad(p);
     // div(phi,K)      Gauss linearUpwind grad(K);
     // div(phiv,p)     Gauss linearUpwind grad(p);
 
-    div(phi,k)      Gauss upwind;
-    div(phi,epsilon) Gauss upwind;
+    // div(phi,k)      Gauss upwind;
+    // div(phi,epsilon) Gauss upwind;
     div(((rho*nuEff)*dev2(T(grad(U))))) Gauss linear;
 }
 

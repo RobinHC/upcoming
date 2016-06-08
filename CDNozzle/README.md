@@ -4,8 +4,9 @@ All code can be found at:
 https://github.com/rlee32/openfoam_tutorials/tree/master/CDNozzle  
 
 ## Description  
-Here we simulate subsonic and supersonic flow in a converging-diverging nozzle 
-using a structured axisymmetric mesh written in Gmsh. 
+Here we simulate subsonic and supersonic inviscid flow in a 
+converging-diverging nozzle using a structured axisymmetric mesh 
+written in Gmsh. 
 The flow starts subsonic at the inlet, and becomes supersonic after passing 
 through the throat. 
 We compare the simulation results with experimental measurements found at: 
@@ -23,8 +24,9 @@ utility.
 gmsh mesh.geo -3 -o test.msh  
 gmshToFoam test.msh -case case  
 changeDictionary  
-sonicFoam  
-sample  
+sonicFoam > log  
+./residuals log  
+sample -latestTime  
 
 ## Software
 -Ubuntu 14.04 64-bit  

@@ -45,13 +45,14 @@ def inches(datadir, destdir):
   """
   itm = 0.0254 # in to m
   for item in os.listdir(datadir):
-    with open(destdir+"/"+item, 'w') as new:
-      with open(datadir+"/"+item, 'r') as f:
-        for line in f:
-          entries = line.split()
-          if len(entries) > 0:
-            entries[0] = str( float(entries[0])/itm )
-            new.write( '\t'.join(entries) + "\n" )
+    if os.path.isfile(datadir+"/"+item):
+      with open(destdir+"/"+item, 'w') as new:
+        with open(datadir+"/"+item, 'r') as f:
+          for line in f:
+            entries = line.split()
+            if len(entries) > 0:
+              entries[0] = str( float(entries[0])/itm )
+              new.write( '\t'.join(entries) + "\n" )
   return
 
 if __name__ == "__main__":

@@ -32,14 +32,15 @@ boundaryField
 
     outlet
     {
-        type            inletOutlet;
-        inletValue      $internalField;
-        value           $internalField;
+        type            zeroGradient;
+        // type            inletOutlet;
+        // inletValue      $internalField;
+        // value           $internalField;
     }
 
     nozzle
     {
-        type            zeroGradient;
+        type            slip;
     }
 
     wedge0
