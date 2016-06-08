@@ -9,39 +9,45 @@ FoamFile
 {
     version     2.0;
     format      ascii;
-    class       dictionary;
-    location    "constant";
-    object      thermophysicalProperties;
+    class       volScalarField;
+    location    "0";
+    object      k;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-thermoType
-{
-    type            hePsiThermo;
-    mixture         pureMixture;
-    transport       const;
-    thermo          hConst;
-    equationOfState perfectGas;
-    specie          specie;
-    energy          sensibleInternalEnergy;
-}
+#include        "inputs"
 
-mixture
+dimensions      [0 2 -2 0 0 0 0];
+
+internalField   uniform $turbulentKE;
+
+boundaryField
 {
-    specie
+    inlet
     {
-        nMoles          1;
-        molWeight       28.9;
+        type            inletOutlet;
+        inletValue      $internalField;
+        value           $internalField;
     }
-    thermodynamics
+    outlet
     {
-        Cp              1004.5;
-        Hf              2.544e+06;
+        type            inletOutlet;
+        inletValue      $internalField;
+        value           $internalField;
     }
-    transport
+    nozzle
     {
-        mu              0;
-        Pr              1;
+        type            kqRWallFunction;
+        value           $internalField;
+    }
+
+    wedge0
+    {
+        type            wedge;
+    }
+    wedge1
+    {
+        type            wedge;
     }
 }
 

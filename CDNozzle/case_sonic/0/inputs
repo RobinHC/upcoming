@@ -9,41 +9,19 @@ FoamFile
 {
     version     2.0;
     format      ascii;
-    class       dictionary;
-    location    "constant";
-    object      thermophysicalProperties;
+    class       volVectorField;
+    object      U;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
-
-thermoType
-{
-    type            hePsiThermo;
-    mixture         pureMixture;
-    transport       const;
-    thermo          hConst;
-    equationOfState perfectGas;
-    specie          specie;
-    energy          sensibleInternalEnergy;
-}
-
-mixture
-{
-    specie
-    {
-        nMoles          1;
-        molWeight       28.9;
-    }
-    thermodynamics
-    {
-        Cp              1004.5;
-        Hf              2.544e+06;
-    }
-    transport
-    {
-        mu              0;
-        Pr              1;
-    }
-}
-
+// By sqrt(gamma*R*total_temp), speed of sound is approximately 149.4 m/s
+initial_velocity        (0 0 0); // m/s, initial condition, M~=0.2
+total_temperature       55.5556; // Kelvin
+total_pressure          6894.76; // Pascals
+exit_pressure           6136.3364; // Pascals total/exit = 0.89 
+// exit_pressure           5171.07; // Pascals total/exit = 0.75
+// exit_pressure           1103.1616; // Pascals total/exit = 0.16
+// turbulence model
+turbulentKE             1000; // k
+turbulentEpsilon        25000; // epsilon
 
 // ************************************************************************* //

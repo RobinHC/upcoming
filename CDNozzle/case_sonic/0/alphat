@@ -9,39 +9,44 @@ FoamFile
 {
     version     2.0;
     format      ascii;
-    class       dictionary;
-    location    "constant";
-    object      thermophysicalProperties;
+    class       volScalarField;
+    location    "0";
+    object      alphat;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-thermoType
-{
-    type            hePsiThermo;
-    mixture         pureMixture;
-    transport       const;
-    thermo          hConst;
-    equationOfState perfectGas;
-    specie          specie;
-    energy          sensibleInternalEnergy;
-}
+dimensions      [1 -1 -1 0 0 0 0];
 
-mixture
+internalField   uniform 0;
+
+boundaryField
 {
-    specie
+    inlet
     {
-        nMoles          1;
-        molWeight       28.9;
+        type            calculated;
+        value           uniform 0;
     }
-    thermodynamics
+    outlet
     {
-        Cp              1004.5;
-        Hf              2.544e+06;
+        type            calculated;
+        value           uniform 0;
     }
-    transport
+    nozzle
     {
-        mu              0;
-        Pr              1;
+        // Boundary condition for turbulent thermal diffusivity when using wall 
+        // functions.
+        type            compressible::alphatWallFunction; 
+        Prt             0.85; // Turbulent Prandtl number. 
+        value           uniform 0;
+    }
+
+    wedge0
+    {
+        type            wedge;
+    }
+    wedge1
+    {
+        type            wedge;
     }
 }
 
