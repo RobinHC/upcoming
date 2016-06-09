@@ -1,7 +1,7 @@
 #!/bin/bash
 
 gnuplot -persist > /dev/null 2>&1 << EOF
-	set title "Mach Number vs. Axial Position at Pressure Ratio of 0.89"
+	set title "Mach Number vs. Axial Position at Pressure Ratio of 0.89 (sonicFoam)"
 	set xlabel "x (in)"
 	set ylabel "M"
 

@@ -1,0 +1,28 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  3.0.0                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volVectorField;
+    object      U;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+// By sqrt(gamma*R*total_temp), speed of sound is approximately 149.4 m/s
+initial_velocity        (29.88 0 0); // (0 0 0); // m/s, initial condition, M~=0.2
+total_temperature       55.5556; // Kelvin
+total_pressure          6894.76; // Pascals
+// exit_pressure           6136.3364; // Pascals, total/exit = 0.89 
+// exit_pressure           5171.07; // Pascals, total/exit = 0.75
+exit_pressure           1103.1616; // Pascals, total/exit = 0.16
+initial_pressure        3619.749; // Pascals, to ease shock formation.
+// turbulence model
+turbulentKE             1000; // k
+turbulentEpsilon        25000; // epsilon
+
+// ************************************************************************* //

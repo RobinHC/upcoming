@@ -56,6 +56,7 @@ def inches(datadir, destdir):
   return
 
 if __name__ == "__main__":
+  os.system("rm processed/*")
   inches( "present", "processed" )
   mach( "processed", "processed" )
   pressure( "processed", "processed" )

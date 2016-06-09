@@ -7,8 +7,8 @@
 
 //Inputs
 
-normal_cells = 31;
-axis_cells = 51;
+normal_cells = 61;
+axis_cells = 101;
 samples = 200; // points to use in BSpline of nozzle wall.
 bump = 1; // controls concentration near wall and centerline.
 // Constants

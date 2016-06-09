@@ -17,7 +17,7 @@ FoamFile
 // As per http://turbmodels.larc.nasa.gov/axiswblim7_val.html:
 // Re = 57060 per cm and M = 7.11:
 //  U = 1274.8 m/s and nu = 0.00022341395
-freestream_velocity     (200 0 0); // (1274.8 0 0); // m/s
+freestream_velocity     (900 0 0); // (1274.8 0 0); // m/s
 static_temperature      80; // Kelvin, aka freestream temp.
 static_pressure         2296; // Pascals, assumed density = 0.1
 wall_temperature        311; // K
