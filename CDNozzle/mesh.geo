@@ -7,8 +7,8 @@
 
 //Inputs
 
-normal_cells = 120;
-axis_cells = 200;
+normal_cells = 31;
+axis_cells = 51;
 samples = 200; // points to use in BSpline of nozzle wall.
 bump = 1; // controls concentration near wall and centerline.
 // Constants
@@ -77,11 +77,11 @@ Recombine Surface{ surf };
 
 // Make 3D wedge.
 
-Rotate {{1,0,0},{0,0,0},2.5*Pi/180.0}
+Rotate {{1,0,0},{0,0,0},0.5*Pi/180.0}
 {
  Surface{surf};
 }
-new_entities[] = Extrude {{1,0,0},{0,0,0},-5*Pi/180.0}
+new_entities[] = Extrude {{1,0,0},{0,0,0},-1*Pi/180.0}
 {
  Surface{surf};
  Layers{1};

@@ -1,8 +1,8 @@
 /*--------------------------------*- C++ -*----------------------------------*\
 | =========                 |                                                 |
 | \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
-|  \\    /   O peration     | Version:  3.0.0                                 |
-|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|  \\    /   O peration     | Version:  v3.0+                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
 |    \\/     M anipulation  |                                                 |
 \*---------------------------------------------------------------------------*/
 FoamFile
@@ -17,39 +17,26 @@ FoamFile
 
 solvers
 {
-    "rho.*"
+    "(rho|rhoU|rhoE)"
     {
         solver          diagonal;
     }
 
-    "p.*"
+    U
     {
-        solver          PBiCG;
-        preconditioner  DILU;
-        tolerance       1e-12;
-        relTol          1e-1;
+        solver          smoothSolver;
+        smoother        GaussSeidel;
+        nSweeps         2;
+        tolerance       1e-09;
+        relTol          0.01;
     }
 
-    "(U|e).*"
+    h
     {
-        $p;
-        tolerance       1e-9;
-        relTol          1e-1;
-    }
-
-    "(k|epsilon).*"
-    {
-        $p;
+        $U;
         tolerance       1e-10;
-        relTol          1e-1;
+        relTol          0;
     }
-}
-
-PIMPLE
-{
-    nOuterCorrectors 1;
-    nCorrectors      1;
-    nNonOrthogonalCorrectors 1;
 }
 
 

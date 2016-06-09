@@ -1,8 +1,8 @@
 /*--------------------------------*- C++ -*----------------------------------*\
 | =========                 |                                                 |
 | \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
-|  \\    /   O peration     | Version:  v3.0+                                 |
-|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|  \\    /   O peration     | Version:  3.0.0                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
 |    \\/     M anipulation  |                                                 |
 \*---------------------------------------------------------------------------*/
 FoamFile
@@ -14,8 +14,6 @@ FoamFile
     object      fvSchemes;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
-
-fluxScheme      Kurganov;
 
 ddtSchemes
 {
@@ -30,7 +28,29 @@ gradSchemes
 divSchemes
 {
     default         none;
-    div(tauMC)      Gauss linear;
+    // // 2nd order central
+    // default      Gauss linear;
+
+    // Default 2nd order
+    div(phi,U)      Gauss limitedLinearV 1;
+    div(phi,e)      Gauss limitedLinear 1;
+    div(phid,p)     Gauss limitedLinear 1;
+    div(phi,K)      Gauss limitedLinear 1;
+    div(phiv,p)     Gauss limitedLinear 1;
+    
+    // // Upwind 1st order
+    // default         Gauss upwind;
+
+    // // Upwind 2nd order
+    // div(phi,U)      Gauss linearUpwind grad(U);
+    // div(phi,e)      Gauss linearUpwind grad(e);
+    // div(phid,p)     Gauss linearUpwind grad(p);
+    // div(phi,K)      Gauss linearUpwind grad(K);
+    // div(phiv,p)     Gauss linearUpwind grad(p);
+
+    // div(phi,k)      Gauss upwind;
+    // div(phi,epsilon) Gauss upwind;
+    div(((rho*nuEff)*dev2(T(grad(U))))) Gauss linear;
 }
 
 laplacianSchemes
@@ -41,9 +61,6 @@ laplacianSchemes
 interpolationSchemes
 {
     default         linear;
-    reconstruct(rho) vanLeer;
-    reconstruct(U)  vanLeerV;
-    reconstruct(T)  vanLeer;
 }
 
 snGradSchemes

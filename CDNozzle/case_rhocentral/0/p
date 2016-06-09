@@ -10,34 +10,51 @@ FoamFile
     version     2.0;
     format      ascii;
     class       volScalarField;
-    location    "0";
-    object      alphat;
+    object      p;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-dimensions      [1 -1 -1 0 0 0 0];
+#include        "inputs"
 
-internalField   uniform 0;
+dimensions      [1 -1 -2 0 0 0 0];
 
-boundaryField
+internalField   uniform $exit_pressure;
+
+boundaryField 
 {
     inlet
     {
-        type            calculated;
-        value           uniform 0;
+        type            totalPressure;
+        p0              uniform $total_pressure;
+        U               U;
+        phi             phi;
+        rho             rho;
+        psi             none;
+        gamma           1.4;
+        value           uniform $total_pressure;
     }
     outlet
     {
-        type            calculated;
-        value           uniform 0;
+        type            waveTransmissive;
+        field           p;
+        phi             phi;
+        rho             rho;
+        psi             thermo:psi;
+        gamma           1.4;
+        fieldInf        $exit_pressure;
+        // lInf: A measure of how far away the far-field condition should be. 
+        lInf            0.0254; 
+        value           $internalField;
     }
+    // outlet
+    
+    //     type            fixedValue;
+    //     value           uniform $exit_pressure;
+    
+
     nozzle
     {
-        // Boundary condition for turbulent thermal diffusivity when using wall 
-        // functions.
-        type            compressible::alphatWallFunction; 
-        Prt             0.85; // Turbulent Prandtl number. 
-        value           uniform 0;
+        type            slip;
     }
 
     wedge0
@@ -49,6 +66,5 @@ boundaryField
         type            wedge;
     }
 }
-
 
 // ************************************************************************* //

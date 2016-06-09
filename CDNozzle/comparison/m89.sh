@@ -12,5 +12,11 @@ gnuplot -persist > /dev/null 2>&1 << EOF
       with lines,\
     "processed/p89_200x120_M.xy" using 1:2 title \
       'Present OpenFOAM (200x120)' \
+      with lines,\
+    "processed/p89_51x31_M.xy" using 1:2 title \
+      'Present OpenFOAM (51x31)' \
+      with lines,\
+    "processed/axial_M.xy" using 1:2 title \
+      'Present OpenFOAM (test)' \
       with lines
 EOF

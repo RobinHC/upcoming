@@ -26,8 +26,11 @@ boundaryField
     {
         type            totalTemperature;
         gamma           1.4;
+        U               U;
+        phi             phi;
+        psi             thermo:psi;
         T0              uniform $total_temperature;
-        value           uniform $total_temperature;
+        value              uniform $total_temperature;
     }
 
     outlet

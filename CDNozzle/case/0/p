@@ -18,7 +18,8 @@ FoamFile
 
 dimensions      [1 -1 -2 0 0 0 0];
 
-internalField   uniform $exit_pressure;
+// internalField   uniform $exit_pressure;
+internalField   uniform $total_pressure;
 
 boundaryField 
 {
@@ -31,7 +32,6 @@ boundaryField
         rho             rho;
         psi             none;
         gamma           1.4;
-        value           uniform $total_pressure;
     }
     // outlet
     // {

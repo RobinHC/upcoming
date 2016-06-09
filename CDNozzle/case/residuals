@@ -12,8 +12,7 @@ gnuplot -persist << EOF
   set xlabel "Iteration"
   set ylabel "Residual"
 
-  plot "logs/rho_0" with lines,\
-    "logs/rhoE_0" with lines,\
-    "logs/rhoUy_0" with lines,\
-    "logs/rhoUx_0" with lines
+  plot "logs/Ux_0" with lines,\
+    "logs/Uy_0" with lines,\
+    "logs/p_0" with lines
 EOF
